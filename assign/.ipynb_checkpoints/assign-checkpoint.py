@@ -6,7 +6,7 @@ from pathlib import Path
 
 def assign_grid_to_SWT(u,v,latname="latitude",lonname="longitude",
                              cluster_filename='SWT_fields/SWT_data.nc',
-                             quiet=False):
+                             interpolation=True,quiet=False):
     
     ''' Assign a 850hPa wind field to a Australian Synoptic Weather Type
      
@@ -29,6 +29,8 @@ def assign_grid_to_SWT(u,v,latname="latitude",lonname="longitude",
         Name of the longitude variable name in the input u and v DataArrays
     cluster_filename : str (default: "SWT_fields/SWT_data.nc")
         Location of the netcdf containing the clustered SWT fields.
+    interpolate : bool (default: True)
+        If false, does not do any interpolation on the grid. Note: if false, grids must be exactly the same.
     quiet : bool (default: False)
         If false, prints out the cluster_ID and SWT label, else simply and quietly returns the variables as specified.
     
@@ -46,19 +48,23 @@ def assign_grid_to_SWT(u,v,latname="latitude",lonname="longitude",
     SWTs=clusters.SWT
     lat_cluster,lon_cluster = np.meshgrid(clusters.latitude, clusters.longitude, indexing='ij')
 
-    ## Interpolate the input u-grid to the clustering grid
-    if u["latitude"].values[0]>u["latitude"].values[-1]:
-        u=u.reindex(latname=list(reversed(u[latname]))) ## Reverse the latitude so that it is increasing in value
-    ulat=u.latitude.values; ulon=u.longitude.values
-    f = interpolate.RegularGridInterpolator((ulat,ulon),u.u.values)
-    u_int = f((lat_cluster,lon_cluster))
-
-    ## Interpolate the input v-grid to the clustering grid
-    if v["latitude"].values[0]>v["latitude"].values[-1]:
-        v=v.reindex(latname=list(reversed(v[latname]))) ## Reverse the latitude so that it is increasing in value
-    vlat=v.latitude.values; vlon=v.longitude.values
-    f = interpolate.RegularGridInterpolator((vlat,vlon),v.v.values)
-    v_int = f((lat_cluster,lon_cluster))
+    if interpolation:
+        ## Interpolate the input u-grid to the clustering grid
+        if u["latitude"].values[0]>u["latitude"].values[-1]:
+            u=u.reindex(latname=list(reversed(u[latname]))) ## Reverse the latitude so that it is increasing in value
+        ulat=u.latitude.values; ulon=u.longitude.values
+        f = interpolate.RegularGridInterpolator((ulat,ulon),u.u.values)
+        u_int = f((lat_cluster,lon_cluster))
+    
+        ## Interpolate the input v-grid to the clustering grid
+        if v["latitude"].values[0]>v["latitude"].values[-1]:
+            v=v.reindex(latname=list(reversed(v[latname]))) ## Reverse the latitude so that it is increasing in value
+        vlat=v.latitude.values; vlon=v.longitude.values
+        f = interpolate.RegularGridInterpolator((vlat,vlon),v.v.values)
+        v_int = f((lat_cluster,lon_cluster))
+    else:
+        u_int= u.u.values
+        v_int= v.v.values
 
     cluster_ID = assign(u_int,v_int,clusters.clusterU.values,clusters.clusterV.values)
     label = str(SWTs.sel(clusterID=cluster_ID).values)
