@@ -32,20 +32,17 @@ def assign_grid_to_SWT(u,v,latname="latitude",lonname="longitude",
     interpolate : bool (default: True)
         If false, does not do any interpolation on the grid. Note: if false, grids must be exactly the same.
     quiet : bool (default: False)
-        If false, prints out the cluster_ID and SWT label, else simply and quietly returns the variables as specified.
+        If false, prints out the SWT label, else simply and quietly returns the variables as specified.
     
     Returns
     -------
-    label : str
+    SWT : str
         The Synoptic Weather Type code.
-    cluster_ID : int
-        The clusterID of the Synoptic Weather Type as per the SWT_data file. 
     '''
     
     if not Path(cluster_filename).is_file():
         sys.exit(f'The SWT data file cannot be located at {cluster_filename}.\nPoint to a different file location using the option cluster_filename')
     clusters=xr.open_dataset(cluster_filename)
-    SWTs=clusters.SWT
     lat_cluster,lon_cluster = np.meshgrid(clusters.latitude, clusters.longitude, indexing='ij')
 
     if interpolation:
@@ -67,15 +64,14 @@ def assign_grid_to_SWT(u,v,latname="latitude",lonname="longitude",
         v_int= v.v.values
 
     cluster_ID = assign(u_int,v_int,clusters.clusterU.values,clusters.clusterV.values)
-    label = str(SWTs.sel(clusterID=cluster_ID).values)
+    SWT = clusters.SWT.isel(SWT=cluster_ID).item()
 
     if not quiet:
-        print(f'Synoptic Weather Type: {label}')
-        print(f'Cluster ID: {cluster_ID}')
+        print(f'Synoptic Weather Type: {SWT}')
 
-    return label,cluster_ID
+    return SWT
 
 def assign(u,v,clusterU,clusterV):
     if(np.shape(u)!=np.shape(clusterU)[1:]): 
         sys.exit('Wind velocity field not the same shape as cluster field, interpolate data to cluster grid first.')
-    return np.argmin(np.sum((u[None,:,:]-clusterU)**2+(v[None,:,:]-clusterV)**2,axis=(-1,-2)))+1
+    return np.argmin(np.sum((u[None,:,:]-clusterU)**2+(v[None,:,:]-clusterV)**2,axis=(-1,-2)))
