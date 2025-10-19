@@ -36,7 +36,7 @@ def read_data(varname,date_start,date_end,utc,lat_lims,lon_lims,path_data,varnam
     if(varname_path == None): varname_path = varname
     # Find filenames to include
     if(progress): 
-        sys.stdout.write(f"\rFinding files to include")
+        sys.stdout.write(f"\rFinding files to include\n")
         sys.stdout.flush()
     filenames_included = get_filenames(varname_path,date_start,date_end,path_data)
     # Determine number of timesteps from filenames (Daily sampling)
