@@ -1,0 +1,15 @@
+Loaded data
+Got wettest days
+
+======================================================================================
+                  Resource Usage on 2025-12-05 13:40:23:
+   Job Id:             156025646.gadi-pbs
+   Project:            if69
+   Exit Status:        0
+   Service Units:      9.53
+   NCPUs Requested:    4                      NCPUs Used: 4               
+                                           CPU Time Used: 00:05:01        
+   Memory Requested:   256.0GB               Memory Used: 117.97GB        
+   Walltime requested: 04:00:00            Walltime Used: 00:05:35        
+   JobFS requested:    100.0MB                JobFS used: 0B              
+======================================================================================
