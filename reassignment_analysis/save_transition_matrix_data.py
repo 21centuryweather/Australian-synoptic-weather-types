@@ -5,13 +5,14 @@ import numpy as np
 from netCDF4 import Dataset
 import compute_statistics as stat
 # %% Paths, data and input
+root          = "/home/565/fl2086/Australian-synoptic-weather-types/" 
 date_start    = '1959-01-01' # Start year-month for clustering data yyyy-mm
 date_end      = '2024-01-01' # End year-month for clustering data yyyy-mm (excluded)
-affix         = 'extratropics'    # Affix to select correct reassigned data
-file_clusters            = "/home/565/fl2086/Australian-synoptic-weather-types/SWT_fields/SWT_data_v1.nc"
-file_clusters_reassigned = f"/home/565/fl2086/Australian-synoptic-weather-types/reassignment_analysis/SWT_data_reassigned_{affix}_v1.nc"
-path_out = "/home/565/fl2086/Australian-synoptic-weather-types/reassignment_analysis/"
-path_data = "/home/565/fl2086/Australian-synoptic-weather-types/example_data/era5_data/"
+affix         = 'extratropics' # Affix to select reassigned data: extratropics, tropics, 500hPa
+file_clusters            = f"{root}SWT_fields/SWT_data_v1.nc"
+file_clusters_reassigned = f"{root}reassignment_analysis/SWT_data_reassigned_{affix}_v1.nc"
+path_out  = f"{root}reassignment_analysis/"
+path_data = f"{root}example_data/era5_data/"
 varnames = ['msl','tcwv','pv_315K','pv_330K','u_850hPa','v_850hPa','u_300hPa','v_300hPa','u_500hPa','v_500hPa','z_500hPa']
 mode = {varname : 'mean' for varname in varnames}
 mode['z_500hPa'] = 'pert'

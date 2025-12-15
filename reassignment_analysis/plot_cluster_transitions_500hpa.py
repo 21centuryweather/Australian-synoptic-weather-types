@@ -9,9 +9,10 @@ from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.backends.backend_pdf import PdfPages
 # %% Input
 # Paths and data
-file_clusters            = "/home/565/fl2086/Australian-synoptic-weather-types/SWT_fields/SWT_data_v1.nc"
-file_clusters_reassigned = "/home/565/fl2086/Australian-synoptic-weather-types/SWT_fields/SWT_data_reassigned_500_v1.nc"
-path_out = "/home/565/fl2086/Australian-synoptic-weather-types/plotting/"
+root = "/home/565/fl2086/Australian-synoptic-weather-types/"
+file_clusters            = f"{root}SWT_fields/SWT_data_v1.nc"
+file_clusters_reassigned = f"{root}reassignment_analysis/SWT_data_reassigned_500_v1.nc"
+path_out = f"{root}reassignment_analysis/"
 # %% Load cluster data
 nc = Dataset(file_clusters,'r')
 surface_clusters = nc.variables['clusterSeries'][:]

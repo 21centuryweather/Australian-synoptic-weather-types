@@ -7,6 +7,7 @@ import kmeans_clustering as kmeans
 from netCDF4 import Dataset
 import numpy as np
 # %% Input
+root          = "/home/565/fl2086/Australian-synoptic-weather-types/" 
 date_start    = '1952-01' # Start year-month for clustering data yyyy-mm 1952
 date_end      = '2023-12' # End year-month for clustering data yyyy-mm (included)
 utc           = 12        # Clustering sampling time (utc) data is sampled daily
@@ -15,8 +16,8 @@ lat_lims      = np.array([-5,-25])  # South and North lattitude limit of analysi
 lon_lims      = np.array([100,165]) # West and East longitude limit of analysis box
 Ncoarsen      = 6         # Coarsening factor in lat and lon direction
 Nclusters     = 30        # Number of clusters
-file_clusters = "/home/565/fl2086/Australian-synoptic-weather-types/SWT_fields/SWT_data_v1.nc"
-path_out      = "/home/565/fl2086/Australian-synoptic-weather-types/reassignment_analysis/" # Directory to save cluster results
+file_clusters = f"{root}SWT_fields/SWT_data_v1.nc"
+path_out      = f"{root}reassignment_analysis/" # Directory to save cluster results
 path_data     = "/g/data/rt52/era5/pressure-levels/reanalysis/"         # Era5 data directory
 # %% Load clustering information (SWT)
 nc = Dataset(file_clusters,'r')

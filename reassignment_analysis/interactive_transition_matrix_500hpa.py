@@ -407,7 +407,7 @@ def on_click(event):
     # Plot 500 hPa map
     elif label_type == 'reassigned': # reassigned composite map
       j = artist._label_index
-      plot_data = get_composite_500hPa(j)
+      plot_data = get_composite_reassigned(j)
       show_composite_plot(plot_data,None,j,'reassigned')
     # Update ticks
     elif label_type in labels:

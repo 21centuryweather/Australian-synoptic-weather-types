@@ -140,8 +140,8 @@ ax.grid(which='minor', color=title_color, linestyle='-', linewidth=0.25)
 ax.tick_params(axis='both', which='minor', length=0)
 # Set titles, labels and color axis
 plt.title("Synoptic weather types original \u2192 extratropics only transition matrix",color=title_color,fontsize=18)
-ax.set_xlabel('Original SWT',color=title_color,fontsize=14)
-ax.set_ylabel('Reassigned SWT',color=title_color,fontsize=14)
+ax.set_ylabel('Original SWT',color=title_color,fontsize=14)
+ax.set_xlabel('Reassigned SWT',color=title_color,fontsize=14)
 ax.tick_params(axis='both', colors=title_color)
 for spine in ax.spines.values():
     spine.set_color(title_color)
