@@ -1,0 +1,2 @@
+/g/data/xp65/public/apps/med_conda/envs/analysis3-25.10/lib/python3.11/site-packages/numpy/core/fromnumeric.py:59: UserWarning: Warning: 'argpartition' will ignore the 'mask' of the MaskedArray.
+  return bound(*args, **kwds)
