@@ -78,11 +78,23 @@ def read_data(varname,date_start,date_end,utc,lat_lims,lon_lims,path_data,varnam
             if level==None: sys.exit('Need to specify pressure/temperature level for 4D data')
             ilevel = np.argwhere(nc.variables['level'][:]==level).flatten()
             if len(ilevel)==0: sys.exit('Pressure/temperature level not available')
-            field = nc.variables[varname][utc::24,ilevel[0],mask_lat[::Ncoarsen],mask_lon[::Ncoarsen]]
-            Ntime = np.shape(field)[0]
-            varout[ts:ts+Ntime,:,:] = field
+            if isinstance(utc, (int, float, complex)):
+                field = nc.variables[varname][utc::24,ilevel[0],mask_lat[::Ncoarsen],mask_lon[::Ncoarsen]]
+                Ntime = np.shape(field)[0]
+                varout[ts:ts+Ntime,:,:] = field
+            elif utc=="daily_mean":
+                sub = nc.variables[varname][:,ilevel[0],mask_lat[::Ncoarsen],mask_lon[::Ncoarsen]]
+                n_days = sub.shape[0] // 24 # Ensure whole days
+                sub = sub[:n_days * 24]
+                sub = sub.reshape(n_days, 24, sub.shape[1], sub.shape[2]) # Reshape: (day, hour, lat, lon)
+                field = sub.mean(axis=1) # Daily mean
+                Ntime = np.shape(field)[0]
+                varout[ts:ts+Ntime,:,:] = field
         else: sys.exit('Unvalid data shape')
-        time[ts:ts+Ntime] = nc.variables['time'][utc::24]
+        if isinstance(utc, (int, float, complex)):
+            time[ts:ts+Ntime] = nc.variables['time'][utc::24]
+        else: 
+            time[ts:ts+Ntime] = nc.variables['time'][12::24]
         ts += Ntime
         nc.close()
     if(progress): 

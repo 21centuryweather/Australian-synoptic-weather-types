@@ -7,7 +7,7 @@ import kmeans_clustering as kmeans
 from netCDF4 import Dataset
 import numpy as np
 # %% Input
-root          = '/home/565/fl2086/Australian-synoptic-weather-types/'
+root          = '/home/565/gdata-gb02/mb0427/Australian-synoptic-weather-types/'
 date_start    = '1952-01' # Start year-month for clustering data yyyy-mm 1952
 date_end      = '2023-12' # End year-month for clustering data yyyy-mm (included)
 utc           = 12        # Clustering sampling time (utc) data is sampled daily

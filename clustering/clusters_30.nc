@@ -1,1 +1,0 @@
-../SWT_fields/SWT_data_v1.nc

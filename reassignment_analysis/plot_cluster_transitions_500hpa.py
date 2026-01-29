@@ -9,9 +9,9 @@ from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.backends.backend_pdf import PdfPages
 # %% Input
 # Paths and data
-root = "/home/565/fl2086/Australian-synoptic-weather-types/"
+root = "/home/565/mb0427/gdata-gb02/Australian_synoptic_weather_types/"
 file_clusters            = f"{root}SWT_fields/SWT_data_v1.nc"
-file_clusters_reassigned = f"{root}reassignment_analysis/SWT_data_reassigned_500_v1.nc"
+file_clusters_reassigned = f"/g/data/if69/mb0427/SWTs/ERA5/SWT_data_reassigned_850_v1.nc"
 path_out = f"{root}reassignment_analysis/"
 # %% Load cluster data
 nc = Dataset(file_clusters,'r')
@@ -151,9 +151,9 @@ ax.set_ylim(0, 1)
 ax.axis('off')
 ax.text(bar_width/2, 1+row_spacing, "850 hPa", va='center', ha='center',
           fontsize=14, color=title_color)
-ax.text(bar_width/2+8, 1+row_spacing, "500 hPa", va='center', ha='center',
+ax.text(bar_width/2+8, 1+row_spacing, "850 hPa daily mean", va='center', ha='center',
           fontsize=14, color=title_color)
-ax.set_title("Weather regimes 850 hPa \u2192 500 hPa transitions\n(Bar height = % of total data in regime)",
+ax.set_title("Weather regimes 850 hPa \u2192 850 hPa daily mean transitions\n(Bar height = % of total data in regime)",
              fontsize=18,color=title_color)
 fig.patch.set_facecolor(background_color)
 ax.set_facecolor(background_color)
@@ -196,8 +196,8 @@ ax.set_yticks(np.arange(-0.5, Nclusters, 1), minor=True)
 ax.grid(which='minor', color=title_color, linestyle='-', linewidth=0.25)
 ax.tick_params(axis='both', which='minor', length=0)
 # Set titles, labels and color axis
-plt.title("Synoptic weather types 850 hPa \u2192 500 hPa transition matrix",color=title_color,fontsize=18)
-ax.set_xlabel('500 hPa SWT',color=title_color,fontsize=14)
+plt.title("Synoptic weather types 850 hPa \u2192 850 hPa daily mean transition matrix",color=title_color,fontsize=18)
+ax.set_xlabel('daily mean 850 hPa SWT',color=title_color,fontsize=14)
 ax.set_ylabel('850 hPa SWT',color=title_color,fontsize=14)
 ax.tick_params(axis='both', colors=title_color)
 for spine in ax.spines.values():

@@ -17,7 +17,7 @@ date_start    = '1959-01-01' # Start year-month for clustering data yyyy-mm
 date_end      = '2024-01-01' # End year-month for clustering data yyyy-mm (excluded)
 nvec = 2
 # %% Load cluster file
-with Dataset(f"{path_root}clustering/clusters_{Nclusters}.nc",'r') as nc:
+with Dataset(f"{path_root}clustering/data/clusters_{Nclusters}.nc",'r') as nc:
   time_clusters = np.array([np.datetime64('1900-01-01')+np.timedelta64(int(t),'h') for t in nc.variables['time'][:]])
   mask_clusters = (time_clusters>=np.datetime64(date_start)) & (time_clusters<np.datetime64(date_end))
   clusterSeries = nc.variables['clusterSeries'][mask_clusters]
