@@ -16,5 +16,5 @@ SWT reassignment: Any gridded 850hPa wind field can be assigned to a SWT. See th
 For more information contact:
 Michael Barnes (michael.barnes@monash.edu) or Christian Jakob (christian.jakob@monash.edu)
 
-The SWTs are open source and can be used for any application. When using, please cite the following article.
+The SWTs are licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0), found here (https://doi.org/10.5281/zenodo.16869777). By using, sharing, or adapting the contents of this repository, you agree to provide appropriate credit to the original author and indicate if changes were made. For full license details, see the LICENSE file or visit Creative Commons Attribution 4.0 International License. When using, please cite the following article.
 Barnes, Michael A., Franciscus Liqui Lung, Christian Jakob, Andrew Gunn, and Michael J. Reeder. 2025. “Australian Synoptic Weather Types.” Journal of Geophysical Research: Atmospheres 130 (24): e2025JD043873. https://doi.org/10.1029/2025JD043873.
