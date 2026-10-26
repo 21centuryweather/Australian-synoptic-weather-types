@@ -11,7 +11,7 @@ This repository houses the Australian Synoptic Weather Types (SWTs), an index of
 # Using the SWTs
 
 SWT climatology: An updated climatology of the SWTs can be found in SWT_climatology in either csv or netcdf format.
-SWT reassignment: Any gridded 850hPa wind field can be assigned to a SWT. See the example in example_scrtips/assign_winds_to_SWT.ipynb for more details.
+SWT reassignment: Any gridded 850hPa wind field can be assigned to a SWT. See the example in [example_scripts/assign_winds_to_SWT.ipynb](example_scripts/assign_winds_to_SWT.ipynb) for more details.
 
 For more information contact:
 Michael Barnes (michael.barnes@monash.edu) or Christian Jakob (christian.jakob@monash.edu)
